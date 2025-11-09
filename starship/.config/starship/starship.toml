@@ -1,0 +1,263 @@
+# =============================================================================
+# Starship Prompt Configuration
+# =============================================================================
+# Documentation: https://starship.rs/config/
+# This config is optimized for:
+# - Go development
+# - Git workflows
+# - Terminal theme compatibility
+# - Clean, informative prompts
+# =============================================================================
+
+# Timeout for starship commands (in milliseconds)
+command_timeout = 1000
+
+# Format of the prompt
+format = """
+[](fg:purple)\
+$username\
+[@](fg:green)\
+$hostname\
+[ in ](fg:gray)\
+$directory\
+$git_branch\
+$git_status\
+$golang\
+$nodejs\
+$python\
+$docker_context\
+$line_break\
+$character
+"""
+
+# Continuation prompt (for multi-line commands)
+continuation_prompt = "[❯](fg:green) "
+
+# =============================================================================
+# PROMPT CHARACTER
+# =============================================================================
+
+[character]
+success_symbol = "[⚡️](bold green)"
+error_symbol = "[⚡️](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+
+# =============================================================================
+# USER & HOSTNAME
+# =============================================================================
+
+[username]
+style_user = "fg:magenta bold"
+style_root = "fg:red bold"
+format = "[$user]($style)"
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style)"
+style = "fg:magenta bold"
+disabled = false
+
+# =============================================================================
+# DIRECTORY
+# =============================================================================
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path]($style)[$read_only]($read_only_style) "
+style = "fg:cyan bold"
+read_only = " 󰌾"
+read_only_style = "fg:red"
+
+# Special directory mappings
+[directory.substitutions]
+"~/Code" = " 󰲋 "
+"~/Code/dotfiles" = " 󱁿 "
+"~/Documents" = " 󰈙 "
+"~/Downloads" = "  "
+
+# =============================================================================
+# GIT
+# =============================================================================
+
+[git_branch]
+symbol = " "
+format = "on [$symbol$branch(:$remote_branch)]($style) "
+style = "fg:green bold"
+truncation_length = 20
+truncation_symbol = "…"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "fg:yellow bold"
+conflicted = "🏳 "
+ahead = "⇡${count} "
+behind = "⇣${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+untracked = "?${count} "
+stashed = "📦 "
+modified = "!${count} "
+staged = "+${count} "
+renamed = "»${count} "
+deleted = "✘${count} "
+
+[git_commit]
+commit_hash_length = 7
+format = '[\($hash$tag\)]($style) '
+style = "fg:green bold"
+only_detached = true
+tag_disabled = false
+tag_symbol = " 🏷  "
+
+# =============================================================================
+# LANGUAGES
+# =============================================================================
+
+[golang]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+style = "fg:cyan bold"
+detect_extensions = ["go"]
+detect_files = ["go.mod", "go.sum"]
+
+[nodejs]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+style = "fg:green bold"
+detect_extensions = ["js", "mjs", "cjs", "ts", "mts", "cts"]
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+
+[python]
+symbol = " "
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "fg:yellow bold"
+pyenv_version_name = true
+detect_extensions = ["py"]
+detect_files = [".python-version", "Pipfile", "pyproject.toml", "requirements.txt"]
+
+[rust]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+style = "fg:red bold"
+
+[lua]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+style = "fg:blue bold"
+
+# =============================================================================
+# TOOLS & CONTEXTS
+# =============================================================================
+
+[docker_context]
+symbol = " "
+format = "via [$symbol$context]($style) "
+style = "fg:blue bold"
+only_with_files = true
+
+[kubernetes]
+symbol = "☸ "
+format = 'on [$symbol$context( \($namespace\))]($style) '
+style = "fg:blue bold"
+disabled = true  # Enable if you work with k8s
+
+[aws]
+symbol = " "
+format = 'on [$symbol($profile )(\($region\) )]($style)'
+style = "fg:yellow bold"
+disabled = true  # Enable if you use AWS
+
+[gcloud]
+symbol = "☁️ "
+format = 'on [$symbol$account(@$domain)(\($region\))]($style) '
+style = "fg:blue bold"
+disabled = true  # Enable if you use GCP
+
+# =============================================================================
+# ENVIRONMENT INDICATORS
+# =============================================================================
+
+[env_var.OLLAMA_HOST]
+symbol = "🦙 "
+format = "via [$symbol$env_value]($style) "
+style = "fg:purple bold"
+disabled = true  # Enable to show Ollama status
+
+# =============================================================================
+# TIME (Disabled by default)
+# =============================================================================
+
+[time]
+disabled = true
+format = '🕙[\[ $time \]]($style) '
+time_format = "%T"
+style = "fg:gray"
+
+# =============================================================================
+# COMMAND DURATION
+# =============================================================================
+
+[cmd_duration]
+min_time = 2_000  # Show duration if command takes > 2 seconds
+format = "took [$duration]($style) "
+style = "fg:yellow bold"
+
+# =============================================================================
+# BATTERY (For laptop users)
+# =============================================================================
+
+[battery]
+full_symbol = "🔋 "
+charging_symbol = "⚡️ "
+discharging_symbol = "💀 "
+disabled = true  # Enable if you want battery status
+
+[[battery.display]]
+threshold = 10
+style = "bold red"
+
+[[battery.display]]
+threshold = 30
+style = "bold yellow"
+
+# =============================================================================
+# STATUS (Exit codes)
+# =============================================================================
+
+[status]
+style = "fg:red bold"
+symbol = "✘ "
+format = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
+map_symbol = true
+disabled = false
+pipestatus = true
+
+# =============================================================================
+# MEMORY USAGE (Disabled by default)
+# =============================================================================
+
+[memory_usage]
+disabled = true
+threshold = 75
+symbol = "🧠 "
+format = "via $symbol[$ram( | $swap)]($style) "
+style = "fg:white bold dimmed"
+
+# =============================================================================
+# SHELL INDICATOR
+# =============================================================================
+
+[shell]
+fish_indicator = "󰈺 "
+bash_indicator = "bash "
+zsh_indicator = ""
+disabled = true  # Enable if you switch between shells
+
+# =============================================================================
+# LINE BREAK
+# =============================================================================
+
+[line_break]
+disabled = false

@@ -1,0 +1,49 @@
+# =============================================================================
+# ZSHRC.LOCAL - Machine-Specific & Secret Configuration
+# =============================================================================
+# This file is sourced by .zshrc and should contain:
+# - API keys and tokens
+# - Machine-specific paths
+# - Work-specific configuration
+# - Any other secrets that shouldn't be in version control
+#
+# IMPORTANT: This file should NEVER be committed to version control
+# Add .zshrc.local to your .gitignore
+# =============================================================================
+
+# =============================================================================
+# API KEYS
+# =============================================================================
+
+export GEMINI_API_KEY="your-gemini-api-key-here"
+export ANTHROPIC_API_KEY="your-anthropic-api-key-here"
+
+# Add other API keys here:
+# export OPENAI_API_KEY="your-key"
+# export AWS_ACCESS_KEY_ID="your-key"
+# export AWS_SECRET_ACCESS_KEY="your-secret"
+
+# =============================================================================
+# MACHINE-SPECIFIC CONFIGURATION
+# =============================================================================
+
+# Add machine-specific aliases or functions
+# Example:
+# alias work-vpn="sudo openconnect your-vpn-server"
+
+# =============================================================================
+# WORK-SPECIFIC CONFIGURATION
+# =============================================================================
+
+# Add work-related environment variables
+# Example:
+# export WORK_PROJECT_PATH="$HOME/Work/projects"
+# export JIRA_USER="your-username"
+
+# =============================================================================
+# CUSTOM OVERRIDES
+# =============================================================================
+
+# Override any settings from main .zshrc here
+# Example:
+# alias gs='git status --short'  # Override main .zshrc git status alias

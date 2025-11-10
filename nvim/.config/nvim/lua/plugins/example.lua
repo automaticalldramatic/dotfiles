@@ -20,23 +20,12 @@ return {
     },
   },
 
-  -- change trouble config
+  -- Diagnostics viewer: unified panel for LSP errors, warnings, and info across the project
+  -- see all errors by using <leader>xx
   {
     "folke/trouble.nvim",
+    enabled = true, --disable trouble if needed
     opts = { use_diagnostic_signs = true },
-  },
-
-  -- disable trouble
-  { "folke/trouble.nvim", enabled = false },
-
-  -- override nvim-cmp and add cmp-emoji
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = { "hrsh7th/cmp-emoji" },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "emoji" })
-    end,
   },
 
   -- change some telescope options and a keymap to browse plugin files
@@ -56,7 +45,9 @@ return {
         layout_strategy = "horizontal",
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
-        winblend = 0,
+        winblend = 1,
+        hidden = true,
+        hide_gitignored = false,
       },
     },
   },
@@ -140,19 +131,6 @@ return {
         "flake8",
         "golangci-lint",
         "gopls",
-      },
-    },
-  },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    enabled = false,
-    opts = {
-      filesystem = {
-        filtered_items = {
-          visible = true,  -- This is key - shows hidden files
-          hide_dotfiles = true,  -- Show dot files like .alpaca_data
-          hide_gitignored = true,  -- Show git-ignored files
-        },
       },
     },
   },

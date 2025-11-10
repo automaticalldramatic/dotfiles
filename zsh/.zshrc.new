@@ -213,6 +213,23 @@ if ! command -v starship &> /dev/null; then
     autoload -Uz git_info
     autoload -Uz ssh_info
     setopt prompt_subst
+
+    # Custom prompt configuration
+    ouchPS="😬"
+    normPS="⚡️"
+    afPS="🦊"
+
+    whichSymbol() {
+        if [[ $1 == *agilefox* ]]; then
+            echo $afPS
+        else
+            echo $normPS
+        fi
+    }
+
+    PS1='
+%B%F{#B5BD68}%n@%m %F{#808080}in%f $(ssh_info)%F{#5E8D87}%~%u %f$(git_info)
+%(?.$(whichSymbol $PWD).$ouchPS %F{#FB6090}%b[%? $(kill -l $?)]%f ) '
 fi
 
 # =============================================================================

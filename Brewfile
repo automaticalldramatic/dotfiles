@@ -16,6 +16,8 @@ brew "git"                  # Version control
 # MODERN CLI TOOLS
 # =============================================================================
 
+brew "eza"
+brew "zoxide"
 brew "bat"                  # Better cat with syntax highlighting
 brew "tree"                 # Directory visualization
 brew "atuin"                # Searchable shell history

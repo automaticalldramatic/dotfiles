@@ -10,16 +10,16 @@
 -- * override the configuration of LazyVim plugins
 return {
   -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
-
-  -- Configure LazyVim to load gruvbox
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "gruvbox",
-    },
-  },
-
+  -- { "ellisonleao/gruvbox.nvim" },
+  --
+  -- -- Configure LazyVim to load gruvbox
+  -- {
+  --   "LazyVim/LazyVim",
+  --   opts = {
+  --     colorscheme = "gruvbox",
+  --   },
+  -- },
+  --
   -- Diagnostics viewer: unified panel for LSP errors, warnings, and info across the project
   -- see all errors by using <leader>xx
   {

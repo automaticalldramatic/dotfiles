@@ -3,7 +3,7 @@ return {
   config = function()
     require("aicommits").setup({
       active_provider = "gemini-api",
-      ui: {
+      ui = {
         use_custom_picker = true,
         picker = {
           width = 0.4,             -- Percentage of screen width

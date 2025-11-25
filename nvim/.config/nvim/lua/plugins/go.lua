@@ -49,6 +49,15 @@ return {
           },
         },
       })
+      -- Set word wrap for Go files at 80 characters
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "go", "gomod", "gotmpl" },
+        callback = function()
+          vim.opt_local.textwidth = 80
+          vim.opt_local.wrap = true
+          vim.opt_local.wrapmargin = 0
+        end,
+      })
     end,
   },
 

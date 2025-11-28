@@ -1,0 +1,35 @@
+
+# We need a shell command for Omarchy because it needs bashrc to work
+command = /home/riz/.config/ghostty/launch-shell.sh
+
+# Dynamic theme colors
+config-file = ?"~/.config/omarchy/current/theme/ghostty.conf"
+
+# Font
+font-family = "CaskaydiaMono Nerd Font"
+font-style = Regular
+font-size = 9
+
+# Window
+window-theme = ghostty
+window-padding-x = 5
+window-padding-y = 5
+confirm-close-surface=false
+resize-overlay = never
+gtk-toolbar-style = flat
+background-opacity = 0.9
+background-blur = true
+background-opacity-cells = true
+
+# Cursor styling
+cursor-style = "block"
+cursor-style-blink = true
+
+# Cursor styling + SSH session terminfo
+# (all shell integration options must be passed together)
+shell-integration-features = no-cursor,ssh-env
+
+# Keyboard bindings
+keybind = shift+insert=paste_from_clipboard
+keybind = control+insert=copy_to_clipboard
+keybind = shift+enter=text:\x1b\r

@@ -13,6 +13,18 @@
 # =============================================================================
 
 # =============================================================================
+# OS DETECTION
+# =============================================================================
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    OS_TYPE="macos"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    OS_TYPE="linux"
+else
+    OS_TYPE="unknown"
+fi
+
+# =============================================================================
 # KEY BINDINGS
 # =============================================================================
 
@@ -56,10 +68,18 @@ unsetopt HIST_VERIFY             # Execute commands using history immediately
 # =============================================================================
 
 # Zsh autosuggestions
-if [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+if [[ "$OS_TYPE" == "macos" ]]; then
+  if [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
     source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     bindkey '^e' autosuggest-accept     # Ctrl+E: Accept suggestion
     bindkey '^w' autosuggest-execute    # Ctrl+W: Accept and run suggestion
+  fi
+elif [[ "$OS_TYPE" == "linux" ]]; then
+  if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    bindkey '^e' autosuggest-accept     # Ctrl+E: Accept suggestion
+    bindkey '^w' autosuggest-execute    # Ctrl+W: Accept and run suggestion
+  fi
 fi
 
 # Zoxide - Smart directory jumping
@@ -75,6 +95,11 @@ fi
 # Direnv - Auto-load directory environments
 if command -v direnv &> /dev/null; then
     eval "$(direnv hook zsh)"
+fi
+
+# Starship - Modern prompt
+if command -v starship &> /dev/null; then
+    eval "$(starship init zsh)"
 fi
 
 # =============================================================================
@@ -155,6 +180,7 @@ alias myip="curl http://ipecho.net/plain; echo"
 
 # IDE
 alias idea="open -na \"IntelliJ IDEA.app\" --args \"$@\""
+n() { if [ "$#" -eq 0 ]; then nvim .; else nvim "$@"; fi; }
 
 # =============================================================================
 # FUNCTIONS - NAVIGATION
@@ -276,10 +302,13 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 # Pyenv setup
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
+if command -v pyenv &> /dev/null; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/riz/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"

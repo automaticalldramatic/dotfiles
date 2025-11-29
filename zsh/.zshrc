@@ -24,12 +24,21 @@ else
     OS_TYPE="unknown"
 fi
 
+
 # =============================================================================
 # KEY BINDINGS
 # =============================================================================
 
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
+
+
+# =============================================================================
+# HOMEBREW INITIALIZATION (Must be early for brew command)
+# =============================================================================
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 
 # =============================================================================
 # COMPLETION SYSTEM
@@ -41,6 +50,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # Enable completion system
 autoload -U compinit && compinit
 zstyle ':completion:*' menu select
+
 
 # =============================================================================
 # HISTORY CONFIGURATION

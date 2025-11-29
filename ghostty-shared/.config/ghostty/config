@@ -1,0 +1,53 @@
+# =====================================================================
+# Ghostty Configuration - Shared Cross-Platform Settings
+# =====================================================================
+# Repository: github.com/riz/dotfiles
+#
+# This file contains settings shared across macOS and Linux.
+# Platform-specific configs are loaded automatically based on the OS.
+# =====================================================================
+
+# Load platform-specific config
+config-file = ?config-macos
+config-file = ?config-linux
+
+# =====================================================================
+# FONT
+# =====================================================================
+# Font size is set per-platform in config-macos / config-linux
+font-family = "CaskaydiaMono Nerd Font"
+font-style = Regular
+
+# =====================================================================
+# APPEARANCE
+# =====================================================================
+# Theme: solarized darcula
+background-opacity = 0.9
+background-blur = true
+background-opacity-cells = true
+
+# =====================================================================
+# WINDOW
+# =====================================================================
+window-theme = ghostty
+window-padding-x = 5
+window-padding-y = 5
+confirm-close-surface = false
+resize-overlay = never
+
+# =====================================================================
+# CURSOR
+# =====================================================================
+cursor-style = "block"
+cursor-style-blink = true
+
+# Cursor styling + SSH session terminfo
+# (all shell integration options must be passed together)
+shell-integration-features = no-cursor,ssh-env
+
+# =====================================================================
+# KEYBOARD BINDINGS
+# =====================================================================
+keybind = shift+insert=paste_from_clipboard
+keybind = control+insert=copy_to_clipboard
+keybind = shift+enter=text:\x1b\r

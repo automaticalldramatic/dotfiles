@@ -1,0 +1,30 @@
+# =====================================================================
+# Ghostty Linux-Specific Configuration
+# =====================================================================
+# This file is loaded by the main config on Linux systems.
+# Contains settings specific to Linux.
+# =====================================================================
+
+# =====================================================================
+# COMMAND
+# =====================================================================
+# We need a shell command for Omarchy because it needs bashrc to work
+command = /home/riz/.config/ghostty/launch-shell.sh
+
+# =====================================================================
+# DYNAMIC THEME COLORS
+# =====================================================================
+# Load theme from omarchy configuration
+config-file = ?"~/.config/omarchy/current/theme/ghostty.conf"
+
+# =====================================================================
+# FONT
+# =====================================================================
+# Font size optimized for standard DPI displays
+font-size = 9
+
+# =====================================================================
+# GTK
+# =====================================================================
+# Linux-specific GTK settings
+gtk-toolbar-style = flat

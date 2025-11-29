@@ -1,0 +1,25 @@
+# =====================================================================
+# Ghostty macOS-Specific Configuration
+# =====================================================================
+# This file is loaded by the main config on macOS systems.
+# Contains settings specific to macOS.
+# =====================================================================
+
+# =====================================================================
+# FONT
+# =====================================================================
+# Font size optimized for Retina displays
+font-size = 14
+
+# =====================================================================
+# WINDOW
+# =====================================================================
+# macOS-specific window settings
+window-decoration = true
+background-blur-radius = 20
+
+# =====================================================================
+# KEYBOARD
+# =====================================================================
+# macOS keyboard behavior - Option key as Alt
+# This allows Option+Left/Right for word navigation in terminal

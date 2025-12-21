@@ -357,6 +357,35 @@ if [ -f "$HOME/Code/google-cloud-sdk/completion.zsh.inc" ]; then
 fi
 
 # =============================================================================
+# CONSOLIDATED PATH SETUP (Order matters!)
+# =============================================================================
+
+# Define common user-level bin paths. ORDER MATTERS.
+# Put directories you want to prioritize earlier in the list.
+USER_BIN_PATHS=(
+    "$HOME/.nvm/versions/node/v22.13.1/bin" # NVM should come early if you want its node/npm
+    "$HOME/Library/pnpm"                    # pnpm home
+    "$HOME/.local/bin"                      # General user binaries
+    "$HOME/Code/google-cloud-sdk/bin"       # Google Cloud SDK
+    "/opt/homebrew/opt/postgresql@16/bin"   # PostgreSQL 16
+    "/usr/local/go/bin"                     # GoLang
+    "/usr/local/MacGPG2/bin"                # MacGPG2
+    "/Library/Frameworks/Mono.framework/Versions/Current/Commands" # Mono
+    "/Applications/iTerm.app/Contents/Resources/utilities" # iTerm utilities
+)
+
+# Filter out non-existent paths to keep PATH clean
+CONSOLIDATED_PATH=""
+for p in "${USER_BIN_PATHS[@]}"; do
+    if [[ -d "$p" && ! "$CONSOLIDATED_PATH" =~ ":$p:" ]]; then
+        CONSOLIDATED_PATH="$p:$CONSOLIDATED_PATH"
+    fi
+done
+
+# Final export. Homebrew paths are already in PATH from brew shellenv
+export PATH="$CONSOLIDATED_PATH:$PATH"
+
+# =============================================================================
 # LOCAL OVERRIDES (Secrets, machine-specific config)
 # =============================================================================
 

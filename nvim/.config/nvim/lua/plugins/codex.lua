@@ -4,12 +4,12 @@ return {
   cmd = { "Codex", "CodexToggle" },
   keys = {
     {
-      "<leader>cc",
+      "<C-x>",
       function()
         require("codex").toggle()
       end,
       desc = "Toggle Codex popup or side-panel",
-      mode = { "n", "t" },
+      mode = { "n", "i", "t" },
     },
   },
   opts = {

@@ -2,14 +2,15 @@ return {
   -- Install language servers and tools via Mason
   {
     "mason-org/mason.nvim",
-    opts = {
-      ensure_installed = {
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
         "vtsls",                        -- TypeScript/JavaScript LSP (better than ts_ls)
         "tailwindcss-language-server",  -- TailwindCSS support
         "eslint-lsp",                   -- ESLint support
         "prettierd",                    -- Code formatter (prettier daemon)
-      },
-    },
+      })
+    end,
   },
 
   -- Configure TypeScript/JavaScript LSP with vtsls

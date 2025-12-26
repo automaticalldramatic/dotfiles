@@ -92,8 +92,9 @@ return {
  -- add tools to mason
  {
   "mason-org/mason.nvim",
-  opts = {
-   ensure_installed = {
+  opts = function(_, opts)
+   opts.ensure_installed = opts.ensure_installed or {}
+   vim.list_extend(opts.ensure_installed, {
 	"stylua",
 	"shellcheck",
 	"shfmt",
@@ -101,7 +102,7 @@ return {
 	"golangci-lint",
 	"gopls",
 	"typescript-language-server",
-   },
-  },
+   })
+  end,
  },
 }
